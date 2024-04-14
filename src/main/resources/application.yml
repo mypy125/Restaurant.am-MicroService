@@ -21,5 +21,9 @@ spring:
           uri: http://localhost:8082/
           predicates:
             - Path=/carts/**
+        - id: user
+          uri: http://localhost:8083/
+          predicates:
+            - Path=/users/**
 
 

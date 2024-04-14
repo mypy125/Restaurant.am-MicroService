@@ -16,8 +16,9 @@ public class GatewayApplication {
 	@Bean
 	public RouteLocator customRoutLocator(RouteLocatorBuilder builder){
 		return builder.routes()
-				.route("cart", r -> r.path("/carts/**").uri("http://localhost:8082/"))
 				.route("order", r -> r.path("/orders/**").uri("http://localhost:8081/"))
+				.route("cart", r -> r.path("/carts/**").uri("http://localhost:8082/"))
+				.route("user", r -> r.path("/users/**").uri("http://localhost:8083/"))
 				.build();
 	}
 }
