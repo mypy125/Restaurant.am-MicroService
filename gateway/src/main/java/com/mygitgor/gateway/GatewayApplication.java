@@ -16,9 +16,10 @@ public class GatewayApplication {
 	@Bean
 	public RouteLocator customRoutLocator(RouteLocatorBuilder builder){
 		return builder.routes()
-				.route("order", r -> r.path("/orders/**").uri("http://localhost:8081/"))
-				.route("cart", r -> r.path("/carts/**").uri("http://localhost:8082/"))
-				.route("user", r -> r.path("/users/**").uri("http://localhost:8083/"))
+				.route("restaurant", r -> r.path("/api/restaurants/**").uri("http://localhost:8081/"))
+				.route("cart", r -> r.path("/api/carts/**").uri("http://localhost:8082/"))
+				.route("user", r -> r.path("/api/users/**").uri("http://localhost:8083/"))
+				.route("address", r -> r.path("/api/address/**").uri("http://localhost:8084/"))
 				.build();
 	}
 }
