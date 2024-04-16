@@ -29,6 +29,10 @@ spring:
           uri: http://localhost:8084/
           predicates:
             - Path=/api/address/**
+        - id: food
+          uri: http://localhost:8085/
+          predicates:
+            - Path=/api/foods/**
 
 
 

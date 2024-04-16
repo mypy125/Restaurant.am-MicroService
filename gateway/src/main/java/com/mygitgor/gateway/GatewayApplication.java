@@ -20,6 +20,7 @@ public class GatewayApplication {
 				.route("cart", r -> r.path("/api/carts/**").uri("http://localhost:8082/"))
 				.route("user", r -> r.path("/api/users/**").uri("http://localhost:8083/"))
 				.route("address", r -> r.path("/api/address/**").uri("http://localhost:8084/"))
+				.route("address", r -> r.path("/api/foods/**").uri("http://localhost:8085/"))
 				.build();
 	}
 }
