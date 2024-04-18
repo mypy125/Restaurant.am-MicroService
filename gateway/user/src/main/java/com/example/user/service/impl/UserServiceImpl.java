@@ -1,6 +1,6 @@
 package com.example.user.service.impl;
 
-import com.example.user.aop.TrackExecutionTime;
+import com.example.aspect.timer.TrackExecutionTime;
 import com.example.user.config.JwtProvider;
 import com.example.user.entity.User;
 import com.example.user.repository.UserRepository;

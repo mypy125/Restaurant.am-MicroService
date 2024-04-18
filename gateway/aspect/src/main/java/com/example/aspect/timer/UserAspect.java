@@ -1,4 +1,4 @@
-package com.example.user.aop;
+package com.example.aspect.timer;
 
 import lombok.SneakyThrows;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserAspect {
     Logger logger = LoggerFactory.getLogger(UserAspect.class);
-    @Pointcut("@annotation(com.example.user.aop.TrackExecutionTime)")
+    @Pointcut("@annotation(com.example.aspect.timer.TrackExecutionTime)")
     public void userServiceMethod(){}
 
     @SneakyThrows
