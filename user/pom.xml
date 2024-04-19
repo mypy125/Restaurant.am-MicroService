@@ -13,6 +13,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>user</name>
     <description>user</description>
+
     <properties>
         <java.version>17</java.version>
         <spring-cloud.version>2023.0.1</spring-cloud.version>
@@ -110,39 +111,8 @@
                     </excludes>
                 </configuration>
             </plugin>
-<!--            <plugin>-->
-<!--                <groupId>org.apache.maven.plugins</groupId>-->
-<!--                <artifactId>maven-compiler-plugin</artifactId>-->
-<!--                <version>3.8.1</version>-->
-<!--                <configuration>-->
-<!--                    <annotationProcessorPaths>-->
-<!--                        <path>-->
-<!--                            <groupId>com.example</groupId>-->
-<!--                            <artifactId>example-annotation-processor</artifactId>-->
-<!--                            <version>1.0.0</version>-->
-<!--                        </path>-->
-
-<!--                        <excludeModulePaths>-->
-<!--&lt;!&ndash;                            <path>&ndash;&gt;-->
-<!--&lt;!&ndash;                                <groupId>com.example</groupId>&ndash;&gt;-->
-<!--&lt;!&ndash;                                <artifactId>user</artifactId>&ndash;&gt;-->
-<!--&lt;!&ndash;                            </path>&ndash;&gt;-->
-<!--&lt;!&ndash;                            <path>&ndash;&gt;-->
-<!--&lt;!&ndash;                                <groupId>com.example</groupId>&ndash;&gt;-->
-<!--&lt;!&ndash;                                <artifactId>cart</artifactId>&ndash;&gt;-->
-<!--&lt;!&ndash;                            </path>&ndash;&gt;-->
-<!--                            <path>-->
-<!--                                <groupId>com.example</groupId>-->
-<!--                                <artifactId>aspect</artifactId>-->
-<!--                            </path>-->
-<!--                        </excludeModulePaths>-->
-<!--                    </annotationProcessorPaths>-->
-<!--                </configuration>-->
-<!--            </plugin>-->
         </plugins>
-
     </build>
-
 
 
 </project>
