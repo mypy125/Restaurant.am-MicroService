@@ -30,6 +30,16 @@
     </repositories>
     <dependencies>
         <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>aspect</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>cart</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
@@ -62,11 +72,7 @@
             <version>${jjwt-tocken.verdion}</version>
             <scope>runtime</scope>
         </dependency>
-        <dependency>
-            <groupId>com.example</groupId>
-            <artifactId>aspect</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
+
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -104,7 +110,39 @@
                     </excludes>
                 </configuration>
             </plugin>
+<!--            <plugin>-->
+<!--                <groupId>org.apache.maven.plugins</groupId>-->
+<!--                <artifactId>maven-compiler-plugin</artifactId>-->
+<!--                <version>3.8.1</version>-->
+<!--                <configuration>-->
+<!--                    <annotationProcessorPaths>-->
+<!--                        <path>-->
+<!--                            <groupId>com.example</groupId>-->
+<!--                            <artifactId>example-annotation-processor</artifactId>-->
+<!--                            <version>1.0.0</version>-->
+<!--                        </path>-->
+
+<!--                        <excludeModulePaths>-->
+<!--&lt;!&ndash;                            <path>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <groupId>com.example</groupId>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <artifactId>user</artifactId>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </path>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <path>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <groupId>com.example</groupId>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <artifactId>cart</artifactId>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </path>&ndash;&gt;-->
+<!--                            <path>-->
+<!--                                <groupId>com.example</groupId>-->
+<!--                                <artifactId>aspect</artifactId>-->
+<!--                            </path>-->
+<!--                        </excludeModulePaths>-->
+<!--                    </annotationProcessorPaths>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
         </plugins>
+
     </build>
+
+
 
 </project>

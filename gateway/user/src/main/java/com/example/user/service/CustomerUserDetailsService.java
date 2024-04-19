@@ -17,8 +17,8 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class CustomerUserDetailsService implements UserDetailsService {
-
     private final UserRepository userRepository;
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByEmail(username);

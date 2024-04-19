@@ -1,6 +1,8 @@
 package com.example.user.controller;
 
 
+//import com.example.cart.entity.Cart;
+//import com.example.cart.repository.CartRepository;
 import com.example.user.config.JwtProvider;
 import com.example.user.entity.Role;
 import com.example.user.entity.User;
@@ -30,6 +32,7 @@ import java.util.Collection;
 @RequiredArgsConstructor
 public class AuthController {
     private final UserRepository userRepository;
+//    private final CartRepository cartRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtProvider jwtProvider;
     private final CustomerUserDetailsService customerUserDetailsService;
@@ -47,6 +50,10 @@ public class AuthController {
         createUser.setRole(user.getRole());
         createUser.setPassword(passwordEncoder.encode(user.getPassword()));
         User saveUser = userRepository.save(createUser);
+
+//        Cart cart = new Cart();
+//        cart.setCustomer(saveUser);
+//        cartRepository.save(cart);
 
 
         Authentication authentication = new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword());

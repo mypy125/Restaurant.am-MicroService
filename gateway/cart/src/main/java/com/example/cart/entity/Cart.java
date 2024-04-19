@@ -1,5 +1,6 @@
 package com.example.cart.entity;
 
+import com.example.user.entity.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,6 +19,9 @@ public class Cart {
     private Long id;
 
     private Long total;
+
+    @OneToOne
+    private User customer;
 
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CartItem> item = new ArrayList<>();

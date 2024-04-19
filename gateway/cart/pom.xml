@@ -28,6 +28,11 @@
         </repository>
     </repositories>
     <dependencies>
+<!--        <dependency>-->
+<!--            <groupId>com.example</groupId>-->
+<!--            <artifactId>user</artifactId>-->
+<!--            <version>0.0.1-SNAPSHOT</version>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -68,6 +73,31 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>com.example</groupId>
+                            <artifactId>example-annotation-processor</artifactId>
+                            <version>1.0.0</version>
+                        </path>
+
+                        <excludeModulePaths>
+                            <path>
+                                <groupId>com.example</groupId>
+                                <artifactId>user</artifactId>
+                            </path>
+                            <path>
+                                <groupId>com.example</groupId>
+                                <artifactId>cart</artifactId>
+                            </path>
+                        </excludeModulePaths>
+                    </annotationProcessorPaths>
+                </configuration>
             </plugin>
         </plugins>
     </build>
