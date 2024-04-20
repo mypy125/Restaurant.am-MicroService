@@ -1,5 +1,6 @@
 package com.example.user.entity;
 
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

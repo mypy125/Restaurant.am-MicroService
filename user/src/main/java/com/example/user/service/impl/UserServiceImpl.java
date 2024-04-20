@@ -3,11 +3,9 @@ package com.example.user.service.impl;
 import com.example.aspect.timer.TrackExecutionTime;
 import com.example.user.config.JwtProvider;
 import com.example.user.entity.User;
-import com.example.user.event.UserEvent;
 import com.example.user.repository.UserRepository;
 import com.example.user.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
 import java.nio.file.attribute.UserPrincipalNotFoundException;
@@ -17,13 +15,6 @@ import java.nio.file.attribute.UserPrincipalNotFoundException;
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final JwtProvider jwtProvider;
-    private final ApplicationEventPublisher eventPublisher;
-    
-
-    @Override
-    public void doSomething() {
-        eventPublisher.publishEvent(new UserEvent(this));
-    }
 
 
     @Override

@@ -1,8 +1,6 @@
 package com.example.user.controller;
 
 
-//import com.example.cart.entity.Cart;
-//import com.example.cart.repository.CartRepository;
 import com.example.user.config.JwtProvider;
 import com.example.user.entity.Role;
 import com.example.user.entity.User;
@@ -55,7 +53,6 @@ public class AuthController {
 //        cart.setCustomer(saveUser);
 //        cartRepository.save(cart);
 
-
         Authentication authentication = new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword());
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
@@ -68,6 +65,7 @@ public class AuthController {
 
         return new ResponseEntity<>(authResponse, HttpStatus.CREATED);
     }
+
 
     @PostMapping("/signin")
     public ResponseEntity<AuthResponse> signIn(@RequestBody LoginRequest request){
