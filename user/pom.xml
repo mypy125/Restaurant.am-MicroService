@@ -34,7 +34,7 @@
     <dependencies>
         <dependency>
             <groupId>com.example</groupId>
-            <artifactId>aspect</artifactId>
+            <artifactId>util</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
 

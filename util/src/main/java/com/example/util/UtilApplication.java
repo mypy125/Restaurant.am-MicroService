@@ -1,13 +1,13 @@
-package com.example.aspect;
+package com.example.util;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class AspectApplication {
+public class UtilApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(AspectApplication.class, args);
+        SpringApplication.run(UtilApplication.class, args);
     }
 
 }

@@ -1,6 +1,6 @@
 package com.example.user.service.impl;
 
-import com.example.aspect.timer.TrackExecutionTime;
+import com.example.util.timer.TrackExecutionTime;
 import com.example.user.config.JwtProvider;
 import com.example.user.entity.User;
 import com.example.user.repository.UserRepository;
@@ -18,14 +18,12 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    @TrackExecutionTime
     public User findUserByJwtToken(String jwt) throws Exception {
         String email = jwtProvider.getEmailFromJwtToken(jwt);
         return findUserByEmail(email);
     }
 
     @Override
-    @TrackExecutionTime
     public User findUserByEmail(String email) throws Exception {
        User user = userRepository.findByEmail(email);
        if(user == null){
