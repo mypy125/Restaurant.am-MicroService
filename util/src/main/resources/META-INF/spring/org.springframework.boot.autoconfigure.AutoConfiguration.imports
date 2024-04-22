@@ -1,1 +1,2 @@
 com.example.util.logger_starter.HttpLoggingAutoConfiguration
+com.example.util.execution_time.ExecutionTimeAutoConfiguration

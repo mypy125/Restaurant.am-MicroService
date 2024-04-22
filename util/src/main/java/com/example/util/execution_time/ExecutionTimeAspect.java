@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 @Aspect
 @Component
 public class ExecutionTimeAspect {
+
     Logger logger = LoggerFactory.getLogger(ExecutionTimeAspect.class);
 
     @Pointcut("@annotation(com.example.util.execution_time.TrackExecutionTime)")
@@ -24,7 +25,7 @@ public class ExecutionTimeAspect {
         long startExecution = System.currentTimeMillis();
         Object object = proceedingJoinPoint.proceed();
         long endExecution = System.currentTimeMillis();
-        logger.info("Method name: "+proceedingJoinPoint.getSignature()+",====== execution time ====== >>>>>> "+(endExecution - startExecution));
+        logger.info("Method name: "+proceedingJoinPoint.getSignature()+",<<<<< ====== execution time is ====== >>>>>> "+(endExecution - startExecution));
         return object;
     }
 }
