@@ -3,10 +3,10 @@ server:
 
 spring:
   application:
-    name: usersregistry
+    name: usersregistr
 
   datasource:
-    url: jdbc:postgresql://172.18.0.1:5432/usersregistry
+    url: jdbc:postgresql://localhost:5432/userregistr
     username: root
     password: root
     driver-class-name: org.postgresql.Driver
@@ -17,6 +17,13 @@ spring:
       hibernate:
         show-sql: true
 
+logging:
+  level:
+    root: debug
+http:
+  logging:
+    enabled: false
+    log-level: info
 #eureka:
 #  client:
 #    service-url:

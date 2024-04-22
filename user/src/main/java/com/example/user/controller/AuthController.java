@@ -8,6 +8,7 @@ import com.example.user.repository.UserRepository;
 import com.example.user.request.LoginRequest;
 import com.example.user.respons.AuthResponse;
 import com.example.user.service.CustomerUserDetailsService;
+import com.example.util.execution_time.TrackExecutionTime;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,13 +31,13 @@ import java.util.Collection;
 @RequiredArgsConstructor
 public class AuthController {
     private final UserRepository userRepository;
-//    private final CartRepository cartRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtProvider jwtProvider;
     private final CustomerUserDetailsService customerUserDetailsService;
 
 
     @PostMapping("/signup")
+    @TrackExecutionTime
     public ResponseEntity<AuthResponse> createUserHandler(@RequestBody User user) throws Exception {
         User isEmailExist = userRepository.findByEmail(user.getEmail());
         if(isEmailExist != null){
@@ -48,10 +49,6 @@ public class AuthController {
         createUser.setRole(user.getRole());
         createUser.setPassword(passwordEncoder.encode(user.getPassword()));
         User saveUser = userRepository.save(createUser);
-
-//        Cart cart = new Cart();
-//        cart.setCustomer(saveUser);
-//        cartRepository.save(cart);
 
         Authentication authentication = new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword());
         SecurityContextHolder.getContext().setAuthentication(authentication);
