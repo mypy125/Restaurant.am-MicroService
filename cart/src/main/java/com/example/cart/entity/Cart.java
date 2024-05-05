@@ -1,6 +1,7 @@
 package com.example.cart.entity;
 
 
+import com.example.user.entity.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,6 +18,9 @@ public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @OneToOne
+    private User customer;
 
     private Long total;
 

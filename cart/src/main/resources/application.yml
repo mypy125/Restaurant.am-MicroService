@@ -4,6 +4,17 @@ server:
 spring:
   application:
     name: cart
+  datasource:
+    url: jdbc:postgresql://localhost:5432/carts
+    username: root
+    password: root
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        show-sql: true
 
 eureka:
   client:

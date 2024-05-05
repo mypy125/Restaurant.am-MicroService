@@ -25,7 +25,7 @@ public class ExecutionTimeAspect {
         long startExecution = System.currentTimeMillis();
         Object object = proceedingJoinPoint.proceed();
         long endExecution = System.currentTimeMillis();
-        logger.info("Method name: "+proceedingJoinPoint.getSignature()+",<<<<< ====== execution time is ====== >>>>>> "+(endExecution - startExecution));
+        logger.info("Method name: "+proceedingJoinPoint.getSignature()+", <<<<< ====== execution time is ====== >>>>>> "+(endExecution - startExecution));
         return object;
     }
 }

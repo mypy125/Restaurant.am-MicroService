@@ -1,6 +1,8 @@
 package com.example.user.controller;
 
 
+import com.example.cart.entity.Cart;
+import com.example.cart.repository.CartRepository;
 import com.example.user.config.JwtProvider;
 import com.example.user.entity.Role;
 import com.example.user.entity.User;
@@ -10,6 +12,7 @@ import com.example.user.respons.AuthResponse;
 import com.example.user.service.CustomerUserDetailsService;
 import com.example.util.execution_time.TrackExecutionTime;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -30,6 +33,7 @@ import java.util.Collection;
 @RequestMapping("/auth")
 @RequiredArgsConstructor
 public class AuthController {
+    private final CartRepository cartRepository;
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtProvider jwtProvider;
@@ -49,6 +53,10 @@ public class AuthController {
         createUser.setRole(user.getRole());
         createUser.setPassword(passwordEncoder.encode(user.getPassword()));
         User saveUser = userRepository.save(createUser);
+
+        Cart cart = new Cart();
+        cart.setCustomer(saveUser);
+        cartRepository.save(cart);
 
         Authentication authentication = new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword());
         SecurityContextHolder.getContext().setAuthentication(authentication);
