@@ -1,8 +1,6 @@
 package com.example.user.controller;
 
 
-import com.example.cart.entity.Cart;
-import com.example.cart.repository.CartRepository;
 import com.example.user.config.JwtProvider;
 import com.example.user.entity.Role;
 import com.example.user.entity.User;
@@ -12,9 +10,7 @@ import com.example.user.respons.AuthResponse;
 import com.example.user.service.CustomerUserDetailsService;
 import com.example.util.execution_time.TrackExecutionTime;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -26,6 +22,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.Collection;
 
@@ -33,11 +30,11 @@ import java.util.Collection;
 @RequestMapping("/auth")
 @RequiredArgsConstructor
 public class AuthController {
-    private final CartRepository cartRepository;
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtProvider jwtProvider;
     private final CustomerUserDetailsService customerUserDetailsService;
+    private RestTemplate restTemplate;
 
 
     @PostMapping("/signup")
@@ -54,9 +51,16 @@ public class AuthController {
         createUser.setPassword(passwordEncoder.encode(user.getPassword()));
         User saveUser = userRepository.save(createUser);
 
-        Cart cart = new Cart();
-        cart.setCustomer(saveUser);
-        cartRepository.save(cart);
+        // После успешного создания пользователя, отправляем запрос на создание корзины в CartService
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Content-Type", "application/json");
+
+        // Здесь код для передачи данных пользователя в теле запроса
+        HttpEntity<User> requestEntity = new HttpEntity<>(saveUser, headers);
+
+        // URL эндпоинта для создания корзины в CartService
+        String cartServiceUrl = "http://localhost:8082/";
+
 
         Authentication authentication = new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword());
         SecurityContextHolder.getContext().setAuthentication(authentication);

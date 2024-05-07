@@ -1,6 +1,5 @@
 package com.example.cart.entity;
 
-
 import com.example.user.entity.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
