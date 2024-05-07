@@ -7,6 +7,7 @@ import com.example.user.entity.User;
 import com.example.user.repository.UserRepository;
 import com.example.user.request.LoginRequest;
 import com.example.user.respons.AuthResponse;
+import com.example.user.respons.CartCreationResponse;
 import com.example.user.service.CustomerUserDetailsService;
 import com.example.util.execution_time.TrackExecutionTime;
 import lombok.RequiredArgsConstructor;
@@ -34,12 +35,12 @@ public class AuthController {
     private final PasswordEncoder passwordEncoder;
     private final JwtProvider jwtProvider;
     private final CustomerUserDetailsService customerUserDetailsService;
-    private RestTemplate restTemplate;
+    private final RestTemplate restTemplate;
 
 
     @PostMapping("/signup")
     @TrackExecutionTime
-    public ResponseEntity<AuthResponse> createUserHandler(@RequestBody User user) throws Exception {
+    public ResponseEntity<CartCreationResponse> createUserHandler(@RequestBody User user) throws Exception {
         User isEmailExist = userRepository.findByEmail(user.getEmail());
         if(isEmailExist != null){
             throw new Exception("Email is already used with another account..");
@@ -61,6 +62,8 @@ public class AuthController {
         // URL эндпоинта для создания корзины в CartService
         String cartServiceUrl = "http://localhost:8082/";
 
+        // Выполняем HTTP POST запрос к CartService для создания корзины
+        ResponseEntity<String> responseEntity = restTemplate.exchange(cartServiceUrl, HttpMethod.POST, requestEntity, String.class);
 
         Authentication authentication = new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword());
         SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -72,7 +75,12 @@ public class AuthController {
         authResponse.setMassage("Register success");
         authResponse.setRole(saveUser.getRole());
 
-        return new ResponseEntity<>(authResponse, HttpStatus.CREATED);
+        // Создаем объект CartCreationResponse, включая сообщение и authResponse
+        CartCreationResponse cartCreationResponse = new CartCreationResponse();
+        cartCreationResponse.setMessage(responseEntity.getBody());
+        cartCreationResponse.setAuthResponse(authResponse);
+
+        return ResponseEntity.ok(cartCreationResponse);
     }
 
 
