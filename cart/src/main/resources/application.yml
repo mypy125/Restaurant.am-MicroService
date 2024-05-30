@@ -20,3 +20,6 @@ spring:
 #  client:
 #    service-url:
 #      defaultZone: http://localhost:8761/eureka
+
+
+strip.api.key: pk_test_51PLoRORv4Iso1jMzem1wp8wTkEdzMdrirTxOeFUpwXDYpOjdH6wYOYS5pcI7hRCZkC83xDJ6zyvALuc3mxbqVPti00Gc3fHV4G

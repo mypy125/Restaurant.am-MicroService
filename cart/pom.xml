@@ -19,6 +19,7 @@
         <spring-cloud.version>2023.0.1</spring-cloud.version>
         <postgres.version>42.7.3</postgres.version>
         <hibernate-core.version>6.4.4.Final</hibernate-core.version>
+        <stripe-api.version>25.9.0</stripe-api.version>
     </properties>
     <repositories>
         <repository>
@@ -63,6 +64,11 @@
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <version>${postgres.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.stripe</groupId>
+            <artifactId>stripe-java</artifactId>
+            <version>${stripe-api.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
