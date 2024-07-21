@@ -10,13 +10,13 @@
 
 	<modules>
         <module>util</module>
-<!--        <module>address</module>-->
+        <module>restaurant-management-service</module>
+		<module>payment-service</module>
         <module>user-service</module>
 		<module>config-service</module>
         <module>order-service</module>
         <module>menu-service</module>
         <module>gateway</module>
-<!--        <module>restaurant</module>-->
     </modules>
 
 </project>
