@@ -1,24 +1,16 @@
 package com.mygitgor.menuservice.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-public class IngredientCategory {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
+public class IngredientCategory extends BaseEntity{
     private String name;
-
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
-    private List<IngredientItem> ingredients = new ArrayList<>();
 }

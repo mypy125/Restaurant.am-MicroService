@@ -35,12 +35,11 @@ public class AuthController {
     private final PasswordEncoder passwordEncoder;
     private final JwtProvider jwtProvider;
     private final CustomerUserDetailsService customerUserDetailsService;
-    private final RestTemplate restTemplate;
 
 
     @PostMapping("/signup")
     @TrackExecutionTime
-    public ResponseEntity<CartCreationResponse> createUserHandler(@RequestBody User user) throws Exception {
+    public ResponseEntity<AuthResponse> createUserHandler(@RequestBody User user) throws Exception {
         User isEmailExist = userRepository.findByEmail(user.getEmail());
         if(isEmailExist != null){
             throw new Exception("Email is already used with another account..");
@@ -52,19 +51,6 @@ public class AuthController {
         createUser.setPassword(passwordEncoder.encode(user.getPassword()));
         User saveUser = userRepository.save(createUser);
 
-        // После успешного создания пользователя, отправляем запрос на создание корзины в CartService
-        HttpHeaders headers = new HttpHeaders();
-        headers.set("Content-Type", "application/json");
-
-        // Здесь код для передачи данных пользователя в теле запроса
-        HttpEntity<User> requestEntity = new HttpEntity<>(saveUser, headers);
-
-        // URL эндпоинта для создания корзины в CartService
-        String cartServiceUrl = "http://localhost:8082/";
-
-        // Выполняем HTTP POST запрос к CartService для создания корзины
-        ResponseEntity<String> responseEntity = restTemplate.exchange(cartServiceUrl, HttpMethod.POST, requestEntity, String.class);
-
         Authentication authentication = new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword());
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
@@ -75,12 +61,7 @@ public class AuthController {
         authResponse.setMassage("Register success");
         authResponse.setRole(saveUser.getRole());
 
-        // Создаем объект CartCreationResponse, включая сообщение и authResponse
-        CartCreationResponse cartCreationResponse = new CartCreationResponse();
-        cartCreationResponse.setMessage(responseEntity.getBody());
-        cartCreationResponse.setAuthResponse(authResponse);
-
-        return ResponseEntity.ok(cartCreationResponse);
+        return new ResponseEntity<>(authResponse, HttpStatus.CREATED);
     }
 
 
