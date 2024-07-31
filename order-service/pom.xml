@@ -32,7 +32,6 @@
         <spring-cloud-sleuth.vesion>3.1.11</spring-cloud-sleuth.vesion>
         <netflix-histrix.vesion>2.2.10.RELEASE</netflix-histrix.vesion>
         <postgres.version>42.7.3</postgres.version>
-        <stripe-api.version>25.9.0</stripe-api.version>
     </properties>
     <dependencies>
         <dependency>

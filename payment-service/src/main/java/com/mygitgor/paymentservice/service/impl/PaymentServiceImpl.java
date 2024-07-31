@@ -1,8 +1,8 @@
-package com.mygitgor.orderservice.service.impl;
+package com.mygitgor.paymentservice.service.impl;
 
-import com.mygitgor.orderservice.entity.Order;
-import com.mygitgor.orderservice.response.PaymentResponse;
-import com.mygitgor.orderservice.service.PaymentService;
+import com.mygitgor.paymentservice.entity.Order;
+import com.mygitgor.paymentservice.respons.PaymentResponse;
+import com.mygitgor.paymentservice.service.PaymentService;
 import com.stripe.Stripe;
 import com.stripe.model.checkout.Session;
 import com.stripe.param.checkout.SessionCreateParams;
@@ -24,14 +24,14 @@ public class PaymentServiceImpl implements PaymentService {
 //                .setSuccessUrl("http://localhost:3000/payment/success"+order.getId())
                 .setCancelUrl("http://localhost:3000/payment/fail")
                 .addLineItem(SessionCreateParams.LineItem.builder()
-                        .setQuantity(1L).setPriceData(SessionCreateParams.LineItem.PriceData.builder()
-                                .setCurrency("usd")
+                                .setQuantity(1L).setPriceData(SessionCreateParams.LineItem.PriceData.builder()
+                                                .setCurrency("usd")
 //                                .setUnitAmount((long)order.getTotalAmount()*100)
-                                .setProductData(SessionCreateParams.LineItem.PriceData.ProductData.builder()
-                                        .setName("taco food")
-                                        .build())
-                                .build()
-                        ).build()
+                                                .setProductData(SessionCreateParams.LineItem.PriceData.ProductData.builder()
+                                                        .setName("taco food")
+                                                        .build())
+                                                .build()
+                                ).build()
                 ).build();
 
         Session session = Session.create(params);
