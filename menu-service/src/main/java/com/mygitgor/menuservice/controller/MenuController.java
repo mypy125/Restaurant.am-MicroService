@@ -1,5 +1,9 @@
 package com.mygitgor.menuservice.controller;
 
+import com.mygitgor.menuservice.controller.request.CreateCategoryRequest;
+import com.mygitgor.menuservice.controller.request.CreateFoodRequest;
+import com.mygitgor.menuservice.controller.request.CreateIngredientCategory;
+import com.mygitgor.menuservice.controller.request.CreateIngredientItemRequest;
 import com.mygitgor.menuservice.entity.Category;
 import com.mygitgor.menuservice.entity.Food;
 import com.mygitgor.menuservice.entity.IngredientCategory;
@@ -26,8 +30,8 @@ public class MenuController {
     }
 
     @PostMapping("/categories")
-    public ResponseEntity<Category> createCategory(@RequestBody Category category) {
-        Category createdCategory = menuService.createCategory(category);
+    public ResponseEntity<Category> createCategory(@RequestBody CreateCategoryRequest request) {
+        Category createdCategory = menuService.createCategory(request);
         return new ResponseEntity<>(createdCategory, HttpStatus.CREATED);
     }
 
@@ -37,8 +41,8 @@ public class MenuController {
     }
 
     @PostMapping("/foods")
-    public ResponseEntity<Food> createFood(@RequestBody Food food) {
-        Food createdFood = menuService.createFood(food);
+    public ResponseEntity<Food> createFood(@RequestBody CreateFoodRequest request) {
+        Food createdFood = menuService.createFood(request);
         return new ResponseEntity<>(createdFood, HttpStatus.CREATED);
     }
 
@@ -48,8 +52,8 @@ public class MenuController {
     }
 
     @PostMapping("/ingredient-categories")
-    public ResponseEntity<IngredientCategory> createIngredientCategory(@RequestBody IngredientCategory ingredientCategory) {
-        IngredientCategory createdIngredientCategory = menuService.createIngredientCategory(ingredientCategory);
+    public ResponseEntity<IngredientCategory> createIngredientCategory(@RequestBody CreateIngredientCategory request) {
+        IngredientCategory createdIngredientCategory = menuService.createIngredientCategory(request);
         return new ResponseEntity<>(createdIngredientCategory, HttpStatus.CREATED);
     }
 
@@ -59,8 +63,8 @@ public class MenuController {
     }
 
     @PostMapping("/ingredients")
-    public ResponseEntity<IngredientItem> createIngredient(@RequestBody IngredientItem ingredientItem) {
-        IngredientItem createdIngredientItem = menuService.createIngredient(ingredientItem);
+    public ResponseEntity<IngredientItem> createIngredient(@RequestBody CreateIngredientItemRequest request) {
+        IngredientItem createdIngredientItem = menuService.createIngredient(request);
         return new ResponseEntity<>(createdIngredientItem, HttpStatus.CREATED);
     }
 }

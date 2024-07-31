@@ -1,5 +1,9 @@
 package com.mygitgor.menuservice.service.impl;
 
+import com.mygitgor.menuservice.controller.request.CreateCategoryRequest;
+import com.mygitgor.menuservice.controller.request.CreateFoodRequest;
+import com.mygitgor.menuservice.controller.request.CreateIngredientCategory;
+import com.mygitgor.menuservice.controller.request.CreateIngredientItemRequest;
 import com.mygitgor.menuservice.entity.Category;
 import com.mygitgor.menuservice.entity.Food;
 import com.mygitgor.menuservice.entity.IngredientCategory;
@@ -33,41 +37,50 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     public List<Category> getAllCategories() {
-        return List.of();
+        return categoryRepository.findAll();
     }
 
     @Override
-    public Category createCategory(Category category) {
-        return null;
+    public Category createCategory(CreateCategoryRequest request) {
+        Category createCategory = new Category(request.categoryName());
+        return categoryRepository.save(createCategory);
     }
 
     @Override
     public List<Food> getAllFoods() {
-        return List.of();
+        return foodRepository.findAll();
     }
 
     @Override
-    public Food createFood(Food food) {
-        return null;
+    public Food createFood(CreateFoodRequest request) {
+        Food createFood = new Food(request.name(),
+                request.description(),
+                request.price(),
+                request.category(),
+                request.images()
+                );
+        return foodRepository.save(createFood);
     }
 
     @Override
     public List<IngredientCategory> getAllIngredientCategories() {
-        return List.of();
+        return ingredientCategoryRepository.findAll();
     }
 
     @Override
-    public IngredientCategory createIngredientCategory(IngredientCategory ingredientCategory) {
-        return null;
+    public IngredientCategory createIngredientCategory(CreateIngredientCategory request) {
+        IngredientCategory createIngredientCategory = new IngredientCategory(request.name());
+        return ingredientCategoryRepository.save(createIngredientCategory);
     }
 
     @Override
     public List<IngredientItem> getAllIngredients() {
-        return List.of();
+        return ingredientItemRepository.findAll();
     }
 
     @Override
-    public IngredientItem createIngredient(IngredientItem ingredientItem) {
-        return null;
+    public IngredientItem createIngredient(CreateIngredientItemRequest request) {
+        IngredientItem createIngredientItem = new IngredientItem(request.name(), request.category());
+        return ingredientItemRepository.save(createIngredientItem);
     }
 }
