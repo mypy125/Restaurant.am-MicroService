@@ -16,5 +16,6 @@ public class Payment {
     private Long OrderID;
     private BigDecimal amount;
     private Status status;
+
     private PaymentMethod paymentMethod;
 }

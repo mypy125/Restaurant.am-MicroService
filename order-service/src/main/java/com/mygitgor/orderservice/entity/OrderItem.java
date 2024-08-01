@@ -1,21 +1,16 @@
 package com.mygitgor.orderservice.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-import java.util.List;
-
-@Data
+@Getter
+@Setter
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-public class OrderItem {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
+@Table(name = "orderItems")
+public class OrderItem extends BaseEntity<Long>{
+    private Long orderId;
+    private Long foodId;
     private int quantity;
-    private Long totalPrice;
 }

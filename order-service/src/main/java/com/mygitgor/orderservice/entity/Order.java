@@ -1,32 +1,22 @@
 package com.mygitgor.orderservice.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "orders")
-public class Order {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+public class Order extends BaseEntity<Long>{
+    private Long userId;
+    private LocalDate createAt;
+    private Status status;
 
-    private Long totalAmount;
-    private String orderStatus;
-    private Date createAt;
-
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderItem> items;
-
-    //    private Payment payment;
-    private int totalItem;
-    private int totalPrice;
-
 }
