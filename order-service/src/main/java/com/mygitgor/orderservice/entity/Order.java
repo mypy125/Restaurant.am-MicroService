@@ -17,6 +17,12 @@ public class Order extends BaseEntity<Long>{
     private LocalDate createAt;
     private Status status;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderItem> items;
+
+    public Double getTotalAmount() {
+        return items.stream()
+                .mapToDouble(OrderItem::getTotalPrice)
+                .sum();
+    }
 }

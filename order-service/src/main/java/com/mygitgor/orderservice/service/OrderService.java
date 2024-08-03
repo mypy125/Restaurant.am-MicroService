@@ -13,5 +13,5 @@ public interface OrderService {
     Order createOrder(Order order);
     Order updateOrder(Long orderId, Order orderDetails);
     void deleteOrder(Long orderId);
-    boolean processPayment(Long orderId, PaymentDetails paymentDetails);
+    boolean processPayment(Order order);
 }

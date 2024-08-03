@@ -10,7 +10,15 @@ import lombok.*;
 @NoArgsConstructor
 @Table(name = "orderItems")
 public class OrderItem extends BaseEntity<Long>{
-    private Long orderId;
-    private Long foodId;
-    private int quantity;
+    @ManyToOne
+    @JoinColumn(name = "order_id")
+    private Order order;
+
+    private String name;
+    private Double price;
+    private Integer quantity;
+
+    public Double getTotalPrice() {
+        return price * quantity;
+    }
 }

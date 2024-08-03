@@ -53,15 +53,21 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public boolean processPayment(Long orderId, PaymentDetails paymentDetails) {
-        PaymentDetails payment = new PaymentDetails(
-                orderId,
+    public boolean processPayment(Order order) {
+        PaymentDetails paymentDetails = new PaymentDetails(
+                order.getId(),
                 "CARD",
-                100.0,
+                order.getTotalAmount(),
                 "PENDING",
-                LocalDateTime.now());
+                LocalDateTime.now()
+        );
 
-        PaymentDetails createdPayment = paymentClient.createPaymentDetails(paymentDetails);
-        return createdPayment != null && "Completed".equals(createdPayment.getStatus());
+        try {
+            PaymentDetails createdPayment = paymentClient.createPaymentDetails(paymentDetails);
+            return createdPayment != null && "Completed".equals(createdPayment.getStatus());
+        } catch (Exception e) {
+            System.err.println("Payment processing failed: " + e.getMessage());
+            return false;
+        }
     }
 }
