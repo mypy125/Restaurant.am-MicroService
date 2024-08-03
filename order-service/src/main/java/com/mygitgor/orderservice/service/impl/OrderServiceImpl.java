@@ -1,11 +1,14 @@
 package com.mygitgor.orderservice.service.impl;
 
+import com.mygitgor.orderservice.dto.NotificationDetails;
+import com.mygitgor.orderservice.client.NotificationClient;
 import com.mygitgor.orderservice.client.PaymentClient;
 import com.mygitgor.orderservice.dto.PaymentDetails;
 import com.mygitgor.orderservice.entity.Order;
 import com.mygitgor.orderservice.repository.OrderRepository;
 import com.mygitgor.orderservice.service.OrderService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -16,10 +19,12 @@ public class OrderServiceImpl implements OrderService {
 
     private final OrderRepository orderRepository;
     private final PaymentClient paymentClient;
+    private final NotificationClient notificationClient;
 
-    public OrderServiceImpl(OrderRepository orderRepository, PaymentClient paymentClient) {
+    public OrderServiceImpl(OrderRepository orderRepository, PaymentClient paymentClient, NotificationClient notificationClient) {
         this.orderRepository = orderRepository;
         this.paymentClient = paymentClient;
+        this.notificationClient = notificationClient;
     }
 
     @Override
@@ -32,10 +37,13 @@ public class OrderServiceImpl implements OrderService {
         return orderRepository.findById(orderId);
     }
 
-    @Override
+    @Transactional
     public Order createOrder(Order order) {
         Order createdOrder = orderRepository.save(order);
-        processPayment(createdOrder.getId());
+        if (!processPayment(createdOrder)) {
+            throw new RuntimeException("Payment processing failed for order ID: " + createdOrder.getId());
+        }
+        sendOrderNotification(createdOrder);
         return createdOrder;
     }
 
@@ -56,18 +64,42 @@ public class OrderServiceImpl implements OrderService {
     public boolean processPayment(Order order) {
         PaymentDetails paymentDetails = new PaymentDetails(
                 order.getId(),
-                "CARD",
+                "Credit Card",
                 order.getTotalAmount(),
-                "PENDING",
+                "Pending",
                 LocalDateTime.now()
         );
 
         try {
             PaymentDetails createdPayment = paymentClient.createPaymentDetails(paymentDetails);
-            return createdPayment != null && "Completed".equals(createdPayment.getStatus());
+            boolean isSuccess = createdPayment != null && "Completed".equals(createdPayment.getStatus());
+            if (isSuccess) {
+                sendPaymentNotification(order);
+            }
+            return isSuccess;
         } catch (Exception e) {
             System.err.println("Payment processing failed: " + e.getMessage());
             return false;
         }
+    }
+
+    private void sendOrderNotification(Order order) {
+        NotificationDetails notificationDetails = new NotificationDetails(
+                order.getUserId(),
+                "Your order has been placed successfully.",
+                "Pending",
+                LocalDateTime.now()
+        );
+        notificationClient.createNotification(notificationDetails);
+    }
+
+    private void sendPaymentNotification(Order order) {
+        NotificationDetails notificationDetails = new NotificationDetails(
+                order.getUserId(),
+                "Your payment has been completed successfully.",
+                "Pending",
+                LocalDateTime.now()
+        );
+        notificationClient.createNotification(notificationDetails);
     }
 }

@@ -1,7 +1,12 @@
 package com.mygitgor.orderservice.dto;
 
+import lombok.Data;
+import lombok.Getter;
+
 import java.time.LocalDateTime;
 
+@Getter
+@Data
 public class PaymentDetails{
         private Long id;
         private Long orderId;
@@ -22,27 +27,4 @@ public class PaymentDetails{
         this.paymentDate = paymentDate;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public Long getOrderId() {
-        return orderId;
-    }
-
-    public String getPaymentMethod() {
-        return paymentMethod;
-    }
-
-    public Double getAmount() {
-        return amount;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public LocalDateTime getPaymentDate() {
-        return paymentDate;
-    }
 }

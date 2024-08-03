@@ -1,5 +1,8 @@
 package com.mygitgor.paymentservice.respons;
 
-public class PaymentResponse {
-    private String payment_url;
+import com.mygitgor.paymentservice.entity.Payment;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface PaymentResponse extends JpaRepository<Payment, Long> {
+
 }

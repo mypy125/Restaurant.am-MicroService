@@ -3,7 +3,7 @@ package com.mygitgor.notificationservice.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mygitgor.notificationservice.conf.RabbitMQConfig;
-import com.mygitgor.notificationservice.dto.NotificationResponseDto;
+import com.mygitgor.notificationservice.dto.NotificationDetails;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.mail.SimpleMailMessage;
@@ -22,7 +22,7 @@ public class MassageHandler {
         byte[] body = message.getBody();
         String jsonBody = new String(body);
         ObjectMapper objectMapper = new ObjectMapper();
-        NotificationResponseDto responseDto = objectMapper.readValue(jsonBody, NotificationResponseDto.class);
+        NotificationDetails responseDto = objectMapper.readValue(jsonBody, NotificationDetails.class);
         System.out.println(responseDto);
 
         SimpleMailMessage mailMessage = new SimpleMailMessage();
@@ -30,7 +30,7 @@ public class MassageHandler {
         mailMessage.setFrom("gor1990.mkhitatryan@gmail.com");
 
         mailMessage.setSubject("response");
-        mailMessage.setText("Make deposit, sum:" + depositResponseDTO.getAmount());
+        mailMessage.setText("Make Pay Card:" + responseDto.getAmount());
 
         try {
             javaMailSender.send(mailMessage);
