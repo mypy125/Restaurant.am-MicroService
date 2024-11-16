@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * User Service (Сервис пользователей):
  * Управляет информацией о пользователях и ролях.
  * API для регистрации, аутентификации и управления пользователями.
- * Взаимодействует с другими сервисами для проверки прав доступа.
+ * User Service взаимодействует с Order Service для проверки прав пользователя.
  */
 @SpringBootApplication
 public class UserServiceApplication {

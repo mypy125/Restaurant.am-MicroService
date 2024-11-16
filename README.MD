@@ -1,4 +1,4 @@
-# Taco Cloud Restaurant Project (Microservices Architecture)
+# Restaurant Project (Microservices Architecture)
 
 ## Project Description
 
@@ -11,7 +11,7 @@
 Web Development in Java  
 **Name:** Gagikovich Gor Mkhitaryan
 
-**Project URL:** [https://github.com/mypy125/Taco-Cloud-service](https://github.com/mypy125/Taco-Cloud-service)
+**Project URL:** [Restaurant.am-MicroService](https://github.com/mypy125/Restaurant.am-MicroService)
 
 ## Inspiration
 
